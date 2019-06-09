@@ -5,29 +5,27 @@ export interface Props {
     enthusiasmLevel?: number;
 }
 
-interface State {
+interface State1 {
     currentEnthusiasm: number;
-    temp: String;
+    value ?: number;
 }
 
-class Hello extends React.Component<Props, State> {
+class Hello extends React.Component<Props, State1> {
 
-    public state: State = {
-        currentEnthusiasm: this.props.enthusiasmLevel || 1,
-        temp : "rahulK"
+    public state: State1 = {
+        currentEnthusiasm: this.props.enthusiasmLevel || 1
     };
 
     onIncrement = () => {
-        this.updateEnthusiasm(this.state.currentEnthusiasm + 1, this.state.temp);
+        this.updateEnthusiasm(this.state.currentEnthusiasm + 1, this.state.value);
     };
 
     onDecrement = () => {
-        this.updateEnthusiasm(this.state.currentEnthusiasm - 1, this.state.temp);
+        this.updateEnthusiasm(this.state.currentEnthusiasm - 1, this.state.value);
     };
 
-    updateEnthusiasm(currentEnthusiasm: number, name: String) {
-        this.setState({temp:""});
-        this.setState({currentEnthusiasm: currentEnthusiasm, temp:name+""+currentEnthusiasm});
+    updateEnthusiasm(currentEnthusiasm: number, value: number = 0) {
+        this.setState({currentEnthusiasm: currentEnthusiasm, value:currentEnthusiasm+1});
     }
 
     render() {
@@ -40,7 +38,7 @@ class Hello extends React.Component<Props, State> {
         return (
             <div className="hello">
                 <div className="greeting">
-                    Hello {name + getExclamationMarks(this.state.currentEnthusiasm) + this.state.temp}
+                    Hello {name + getExclamationMarks(this.state.currentEnthusiasm) + this.state.value}
                 </div>
                 <button onClick={this.onDecrement}>-</button>
                 <button onClick={this.onIncrement}>+</button>
